@@ -8,5 +8,34 @@ export const calculate = (numbers: number[]): number => {
             throw new Error('Hahahahahaha')
         }
     })
-    return 150
+
+    var score = 0
+    var orderedList = numbers.sort((x,y) => x-y).filter ( z => z === 1)
+
+    while (orderedList.length > 0) {
+        if (countOccurances(orderedList, 1) >= 3) {
+            score += 1000
+            removeItemFromArray(orderedList, 1, 3)
+        }
+
+        if ( countOccurances(orderedList, 1) < 3) {
+            const numberOfOccurances = countOccurances(orderedList, 1)
+            score += (100 * numberOfOccurances)
+            removeItemFromArray(orderedList, 1, numberOfOccurances)
+        }
+    }
+
+    return score
+}
+
+function removeItemFromArray (numbers: number[], numberToRemove: number, removalCount: number) {
+    if (numbers.length === 1) {
+        numbers.pop()
+    } else {
+        numbers.splice(numbers.indexOf(numberToRemove), removalCount)
+    }
+}
+
+function countOccurances (numbers: number[], numberToCount: number) : number {
+    return numbers.filter(x => x === numberToCount).length
 }

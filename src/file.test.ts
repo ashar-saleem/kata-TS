@@ -35,13 +35,16 @@ test('calculate should throw error when an input is not 1-6', () => {
 })
 
 
-describe('calculate should give the correct score', () => {
+describe('calculate should return the expected score', () => {
     const theoriesInput = [
-        { testName: 'single1single5', variableName: [1, 2, 3, 4, 5] },
+        // { testName: 'no Match',  input: [2, 3, 4, 6, 2], expectedResult: 0 },
+        // { testName: 'triple 3 and a single 5', input: [3, 4, 5, 3, 3], expectedResult: 350 },
+        // { testName: 'triple 1, a single 1 and  single 5', input: [1, 1, 1, 5, 1] , expectedResult: 1150 },
+           { testName: 'All 1s',  input: [1, 1, 1, 1, 1], expectedResult: 1200 },
     ]
 
     theoretically('{testName} test', theoriesInput, (theory) => {
-        expect(calculate(theory.variableName)).toBe(150)
+        expect(calculate(theory.input)).toBe(theory.expectedResult)
     })
 })
 
